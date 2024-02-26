@@ -11,7 +11,6 @@ class IpiOperations:
             sql = self.__mount_sql(ipi_list)
             config = load_config()
             print(f"Inserting {len(ipi_list)} rows in IPI table...")
-        
             with  psycopg2.connect(**config) as conn:
                 with  conn.cursor() as cur:
                     cur.execute(sql)             

@@ -22,7 +22,7 @@ class IpiUseCase:
     
     def __get_table(self):
         pdf_file = "https://www.gov.br/receitafederal/pt-br/acesso-a-informacao/legislacao/documentos-e-arquivos/tipi.pdf"
-        #pdf_file = "src/tipi-417.pdf"
+        #pdf_file = "tipi3.pdf"
         print(f"Gettings tables from file '{pdf_file}'...")
         table_pdf = read_pdf(
             pdf_file,
