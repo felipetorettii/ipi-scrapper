@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "15432:5432"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - pg
+      
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "123@outlook.com"
+      PGADMIN_DEFAULT_PASSWORD: "123"
+    ports:
+      - "16543:80"
+    depends_on:
+      - db
+    networks:
+      - pg
+    
+  app:
+    image: flask-rest-api
+    ports:
+      - "5000:5000"
+    environment:
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      - db
+    networks:
+      - pg
+
+networks: 
+  pg:
+    driver: bridge
